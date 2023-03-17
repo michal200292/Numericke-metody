@@ -1,13 +1,11 @@
 import matplotlib.pyplot as plt
 import networkx as nx
 import numpy as np
-import graph_generator
 
-def draw_resistance(g, s, t, small=True):
+def draw_with_resistance(g, s, t, small=True):
     n = g.number_of_nodes()
     plt.figure(figsize=(10, 8))
     pos = nx.kamada_kawai_layout(g)
-
     labels = {}
     for i in range(n):
         labels[i] = str(i)
@@ -17,7 +15,7 @@ def draw_resistance(g, s, t, small=True):
             g,
             pos,
             labels,
-            font_size=10,
+            font_size=5,
             font_color="black"
         )
 
@@ -66,7 +64,7 @@ def draw_resistance(g, s, t, small=True):
     plt.show()
 
 
-def draw_current(g, s, t, small=True):
+def draw_with_current(g, s, t, small=True):
     n = g.number_of_nodes()
     g2 = nx.DiGraph()
 
@@ -84,6 +82,7 @@ def draw_current(g, s, t, small=True):
 
     label_weights[(s, t)] = '\u03B5= ' + str(g[s][t]['edge'].voltage)
     plt.figure(figsize=(10, 8))
+
     pos = nx.kamada_kawai_layout(g2)
     if small:
         nx.draw_networkx_labels(
@@ -115,9 +114,9 @@ def draw_current(g, s, t, small=True):
     nx.draw_networkx_edges(
         g2,
         pos,
-        edge_color='red',
+        edge_color="black",
         edgelist=[(a, b) for a, b in g2.edges if a not in [s, t] or b not in [s, t]],
-        arrowsize=arrowsize
+        arrowsize=arrowsize,
     )
 
     edgelist = [(s, t)] if (s, t) in g2.edges else [(t, s)]
