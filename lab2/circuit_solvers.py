@@ -39,6 +39,7 @@ def kirchoff(g, s, t, E):
             else:
                 A[eq_no][edge.index] -= 1
         eq_no += 1
+
     transposed = A.T
     ans = np.linalg.solve(np.matmul(transposed, A), np.matmul(transposed, B))
     for a, b in g.edges:
@@ -69,4 +70,20 @@ def nodal_potentials(g, s, t, E):
             edge.current = (potentials[a] - potentials[b]) / edge.resistance
         else:
             edge.current = (potentials[b] - potentials[a]) / edge.resistance
+
+
+def check_currents(g, s, t):
+    eps = pow(10, -12)
+    for v in range(g.number_of_nodes()):
+        if v != s and v != t:
+            current_sum = 0
+            for neighbor in g.neighbors(v):
+                if v < neighbor:
+                    current_sum += g[v][neighbor]['edge'].current
+                else:
+                    current_sum -= g[v][neighbor]['edge'].current
+            if abs(current_sum) > eps:
+                return False
+    return True
+
 

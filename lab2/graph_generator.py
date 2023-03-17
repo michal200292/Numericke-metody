@@ -125,13 +125,14 @@ def load_graph(file_name):
     values = [float(row.split()[-1]) for row in tab]
     g = nx.Graph()
     index = 0
-    for (v1, v2), R in zip(vertices[1:], values[1:]):
-        g.add_edge(v1, v2)
-        g[v1][v2]['edge'] = Edge(v1, v2, R, 0, index)
-        g[v2][v1]['edge'] = g[v1][v2]['edge']
-        index += 1
-
     (s, t), E = vertices[0], values[0]
+    for (v1, v2), R in zip(vertices[1:], values[1:]):
+        if (v1, v2) != (s, t) and (v1, v2) != (t, s):
+            g.add_edge(v1, v2)
+            g[v1][v2]['edge'] = Edge(v1, v2, R, 0, index)
+            g[v2][v1]['edge'] = g[v1][v2]['edge']
+            index += 1
+
     g.add_edge(s, t)
     g[s][t]['edge'] = Edge(s, t, -1, E, index)
     g[t][s]['edge'] = g[s][t]['edge']
