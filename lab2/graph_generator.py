@@ -1,6 +1,6 @@
 import networkx as nx
 import numpy as np
-import graph_visualiser
+
 
 class Edge:
     def __init__(self, a, b, resistance, voltage, index):
@@ -107,11 +107,33 @@ def generate_triangulation(m, n):
         for j in range(m - 1):
             g.add_edge(j*n + i, j*n + n + i)
 
-
-
     s, t, e = generate_circuit(g)
     return g, s, t, e
 
 
-G, source, target, E = generate_triangulation(20, 20)
-graph_visualiser.draw_with_resistance(G, source, target, small=False)
+def save_graph_to_file(g, s, t, E, file_name):
+    with open("saved_graphs/"+file_name, 'w') as file:
+        file.write(f"{s} {t} {E}\n")
+        for a, b in g.edges:
+            file.write(f"{a} {b} {g[a][b]['edge'].resistance}\n")
+
+
+def load_graph(file_name):
+    with open("saved_graphs/"+file_name, "r") as file:
+        tab = file.readlines()
+    vertices = [map(int, row.split()[:2]) for row in tab]
+    values = [float(row.split()[-1]) for row in tab]
+    g = nx.Graph()
+    index = 0
+    for (v1, v2), R in zip(vertices[1:], values[1:]):
+        g.add_edge(v1, v2)
+        g[v1][v2]['edge'] = Edge(v1, v2, R, 0, index)
+        g[v2][v1]['edge'] = g[v1][v2]['edge']
+        index += 1
+
+    (s, t), E = vertices[0], values[0]
+    g.add_edge(s, t)
+    g[s][t]['edge'] = Edge(s, t, -1, E, index)
+    g[t][s]['edge'] = g[s][t]['edge']
+    return g, s, t, E
+

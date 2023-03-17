@@ -1,6 +1,8 @@
 import matplotlib.pyplot as plt
 import networkx as nx
 import numpy as np
+from matplotlib.patches import ArrowStyle
+
 
 def draw_with_resistance(g, s, t, small=True):
     n = g.number_of_nodes()
@@ -117,6 +119,9 @@ def draw_with_current(g, s, t, small=True):
         edge_color="black",
         edgelist=[(a, b) for a, b in g2.edges if a not in [s, t] or b not in [s, t]],
         arrowsize=arrowsize,
+        arrowstyle=ArrowStyle.CurveFilledA(),
+        width=0.5,
+        alpha=0.5,
     )
 
     edgelist = [(s, t)] if (s, t) in g2.edges else [(t, s)]
@@ -125,12 +130,14 @@ def draw_with_current(g, s, t, small=True):
         pos,
         edgelist=edgelist,
         edge_color='blue',
+        width=0.5,
+        alpha=0.5,
         arrows=False
     )
 
     if small:
         nx.draw_networkx_edge_labels(
-            g,
+            g2,
             pos,
             edge_labels=label_weights
         )
