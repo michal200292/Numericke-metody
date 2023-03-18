@@ -4,7 +4,7 @@ import numpy as np
 from matplotlib.patches import ArrowStyle
 
 
-def draw_with_resistance(g, s, t, small=True):
+def draw_with_resistance(g, s, t, small=True, save_image=""):
     n = g.number_of_nodes()
     plt.figure(figsize=(10, 8))
     pos = nx.kamada_kawai_layout(g)
@@ -63,10 +63,13 @@ def draw_with_resistance(g, s, t, small=True):
             pos,
             edge_labels=label_weights
         )
+
+    if save_image:
+        plt.savefig('saved_images/' + save_image, bbox_inches='tight')
     plt.show()
 
 
-def draw_with_current(g, s, t, small=True):
+def draw_with_current(g, s, t, small=True, save_image=""):
     n = g.number_of_nodes()
     g2 = nx.DiGraph()
 
@@ -141,5 +144,7 @@ def draw_with_current(g, s, t, small=True):
             pos,
             edge_labels=label_weights
         )
+    if save_image:
+        plt.savefig('saved_images/' + save_image, bbox_inches='tight')
     plt.show()
 
