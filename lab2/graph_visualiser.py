@@ -4,10 +4,10 @@ import numpy as np
 from matplotlib.patches import ArrowStyle
 
 
-def draw_with_resistance(g, s, t, small=True, save_image=""):
+def draw_with_resistance(g, s, t, small=True):
     n = g.number_of_nodes()
     plt.figure(figsize=(10, 8))
-    pos = nx.kamada_kawai_layout(g)
+    pos = g.graph['pos']
     labels = {}
     for i in range(n):
         labels[i] = str(i)
@@ -64,12 +64,10 @@ def draw_with_resistance(g, s, t, small=True, save_image=""):
             edge_labels=label_weights
         )
 
-    if save_image:
-        plt.savefig('saved_images/' + save_image, bbox_inches='tight')
     plt.show()
 
 
-def draw_with_current(g, s, t, small=True, save_image=""):
+def draw_with_current(g, s, t, small=True):
     n = g.number_of_nodes()
     g2 = nx.DiGraph()
 
@@ -88,7 +86,7 @@ def draw_with_current(g, s, t, small=True, save_image=""):
     label_weights[(s, t)] = '\u03B5= ' + str(g[s][t]['edge'].voltage)
     plt.figure(figsize=(10, 8))
 
-    pos = nx.kamada_kawai_layout(g2)
+    pos = g.graph['pos']
     if small:
         nx.draw_networkx_labels(
             g2,
@@ -144,7 +142,6 @@ def draw_with_current(g, s, t, small=True, save_image=""):
             pos,
             edge_labels=label_weights
         )
-    if save_image:
-        plt.savefig('saved_images/' + save_image, bbox_inches='tight')
+
     plt.show()
 

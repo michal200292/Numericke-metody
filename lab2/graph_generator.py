@@ -30,6 +30,7 @@ def generate_circuit(g, s=None, t=None):
     g.add_edge(s, t)
     g[s][t]['edge'] = Edge(s, t, -1, e, index)
     g[t][s]['edge'] = g[s][t]['edge']
+    g.graph['pos'] = nx.kamada_kawai_layout(g)
     return s, t, e
 
 
@@ -136,5 +137,6 @@ def load_graph(file_name):
     g.add_edge(s, t)
     g[s][t]['edge'] = Edge(s, t, -1, E, index)
     g[t][s]['edge'] = g[s][t]['edge']
+    g.graph['pos'] = nx.kamada_kawai_layout(g)
     return g, s, t, E
 
