@@ -113,23 +113,23 @@ def draw_with_current(g, s, t, E, small=False, size_param=(10, 8)):
         node_size=30,
     )
 
-    arrowsize = 18 if small else 5
+    arrow_size = 18 if small else 5
     nx.draw_networkx_edges(
         g2,
         pos,
         edge_color="black",
         edgelist=[(a, b) for a, b in g2.edges if a not in [s, t] or b not in [s, t]],
-        arrowsize=arrowsize,
+        arrowsize=arrow_size,
         arrowstyle=ArrowStyle.CurveFilledA(),
         width=0.5,
         alpha=0.5,
     )
 
-    edgelist = [(s, t)] if (s, t) in g2.edges else [(t, s)]
+    edge_list = [(s, t)] if (s, t) in g2.edges else [(t, s)]
     nx.draw_networkx_edges(
         g2,
         pos,
-        edgelist=edgelist,
+        edgelist=edge_list,
         edge_color='blue',
         width=0.5,
         alpha=0.5,
