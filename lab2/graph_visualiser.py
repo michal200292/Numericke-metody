@@ -4,9 +4,9 @@ import numpy as np
 from matplotlib.patches import ArrowStyle
 
 
-def draw_with_resistance(g, s, t, small=True):
+def draw_with_resistance(g, s, t, E, small=False, size_param=(10, 8)):
     n = g.number_of_nodes()
-    plt.figure(figsize=(10, 8))
+    plt.figure(figsize=size_param)
     pos = g.graph['pos']
     labels = {}
     for i in range(n):
@@ -17,7 +17,7 @@ def draw_with_resistance(g, s, t, small=True):
             g,
             pos,
             labels,
-            font_size=5,
+            font_size=10,
             font_color="black"
         )
 
@@ -40,7 +40,7 @@ def draw_with_resistance(g, s, t, small=True):
     label_weights = {}
     for a, b in g.edges:
         label_weights[(a, b)] = str(g[a][b]['edge'].resistance)
-    label_weights[(s, t)] = '\u03B5= ' + str(g[s][t]['edge'].voltage)
+    label_weights[(s, t)] = '\u03B5= ' + str(E)
 
     nx.draw_networkx_edges(
         g,
@@ -67,7 +67,7 @@ def draw_with_resistance(g, s, t, small=True):
     plt.show()
 
 
-def draw_with_current(g, s, t, small=True):
+def draw_with_current(g, s, t, E, small=False, size_param=(10, 8)):
     n = g.number_of_nodes()
     g2 = nx.DiGraph()
 
@@ -83,8 +83,8 @@ def draw_with_current(g, s, t, small=True):
         g2.add_edge(a, b)
         label_weights[(a, b)] = str(np.round(abs(edge.current), 2))
 
-    label_weights[(s, t)] = '\u03B5= ' + str(g[s][t]['edge'].voltage)
-    plt.figure(figsize=(10, 8))
+    label_weights[(s, t)] = '\u03B5= ' + str(E)
+    plt.figure(figsize=size_param)
 
     pos = g.graph['pos']
     if small:
@@ -92,7 +92,7 @@ def draw_with_current(g, s, t, small=True):
             g2,
             pos,
             labels,
-            font_size=5,
+            font_size=10,
             font_color="black"
         )
 

@@ -3,11 +3,10 @@ import numpy as np
 
 
 class Edge:
-    def __init__(self, a, b, resistance, voltage, index):
+    def __init__(self, a, b, resistance, index):
         self.a = a
         self.b = b
         self.resistance = resistance
-        self.voltage = voltage
         self.index = index
         self.current = 0
 
@@ -22,13 +21,13 @@ def generate_circuit(g, s=None, t=None):
     for a, b in g.edges:
         if (a, b) not in [(s, t), (t, s)]:
             resistance = max(np.round(np.random.rand(), 2), 0.01)
-            g[a][b]['edge'] = Edge(a, b, resistance, 0, index)
+            g[a][b]['edge'] = Edge(a, b, resistance, index)
             g[b][a]['edge'] = g[a][b]['edge']
             index += 1
 
     e = max(np.round(np.random.rand(), 2), 0.01)
     g.add_edge(s, t)
-    g[s][t]['edge'] = Edge(s, t, -1, e, index)
+    g[s][t]['edge'] = Edge(s, t, -1, index)
     g[t][s]['edge'] = g[s][t]['edge']
     g.graph['pos'] = nx.kamada_kawai_layout(g)
     return s, t, e
@@ -130,12 +129,12 @@ def load_graph(file_name):
     for (v1, v2), R in zip(vertices[1:], values[1:]):
         if (v1, v2) != (s, t) and (v1, v2) != (t, s):
             g.add_edge(v1, v2)
-            g[v1][v2]['edge'] = Edge(v1, v2, R, 0, index)
+            g[v1][v2]['edge'] = Edge(v1, v2, R, index)
             g[v2][v1]['edge'] = g[v1][v2]['edge']
             index += 1
 
     g.add_edge(s, t)
-    g[s][t]['edge'] = Edge(s, t, -1, E, index)
+    g[s][t]['edge'] = Edge(s, t, -1, index)
     g[t][s]['edge'] = g[s][t]['edge']
     g.graph['pos'] = nx.kamada_kawai_layout(g)
     return g, s, t, E
