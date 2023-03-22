@@ -142,6 +142,7 @@ def load_graph(file_name):
     g.add_edge(s, t)
     g[s][t]['edge'] = Edge(s, t, -1, index)
     g[t][s]['edge'] = g[s][t]['edge']
+
     g.graph['pos'] = nx.kamada_kawai_layout(g)
     return g, s, t, E
 
