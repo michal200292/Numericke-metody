@@ -4,7 +4,17 @@ import numpy as np
 from matplotlib.patches import ArrowStyle
 
 
-def draw_with_resistance(g, s, t, E, small=False, size_param=(10, 8)):
+def draw_with_resistance(
+        g: nx.Graph,
+        s: int,
+        t: int,
+        E: float,
+        small: bool = False,
+        size_param: tuple[int, int] = (10, 8)
+) -> None:
+    """
+    Draw electrical circuit with edges labeled with value of resistance of a certain edge
+    """
     n = g.number_of_nodes()
     plt.figure(figsize=size_param)
     pos = g.graph['pos']
@@ -67,7 +77,19 @@ def draw_with_resistance(g, s, t, E, small=False, size_param=(10, 8)):
     plt.show()
 
 
-def draw_with_current(g, s, t, E, small=False, size_param=(10, 8)):
+def draw_with_current(
+        g: nx.Graph,
+        s: int,
+        t: int,
+        E: float,
+        small: bool = False,
+        size_param: tuple[int, int] = (10, 8)
+) -> None:
+    """
+        Draw electrical circuit with edges labeled with absolute value
+        of current on a certain edge and direction of an edge indicating the direction
+        of a current flow
+    """
     n = g.number_of_nodes()
     g2 = nx.DiGraph()
 
