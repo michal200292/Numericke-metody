@@ -3,8 +3,7 @@ Exercises done during numerical methods course. Computer Science AGH UST course.
 The course included eight laboratory assignments and four bigger projects.
 
 # Projects
-
-## Electrical Circuit Analyzer
-## Simulated Annealing
-## Search Engine
-## Optical Characater Revognition
+## [Applications of Linear Systems](/Linear_Systems)
+## [Simulated Annealing](/Simulated_Annealing)
+## [Search Engine](/Search_Engine)
+## [Discrete Fourier Transform](/OCR)
