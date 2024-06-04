@@ -1,0 +1,43 @@
+#logo{
+    padding-top: 10%;
+    font-size: 600%;
+    justify-content: center;
+    text-align: center;
+    font-family: Calibri, serif;
+}
+
+span{
+    letter-spacing:-0.2em;
+}
+
+#searchbar {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    padding-top: 2%;
+    width: 100%;
+}
+
+#searchform {
+    width: 100%;
+    font-size: 100%;
+}
+
+#query{
+    width: 25%;
+    height: 50%;
+    font-size: 100%;
+    border-radius:10px;
+    padding-left: 1%;
+    padding-right: 1%;
+}
+
+#submitButton{
+    border: none;
+    color: #535151;
+    background-color: #e3e0e0;
+    height: 70%;
+    border-radius:10px;
+    width: 5%;
+    cursor: pointer;
+}

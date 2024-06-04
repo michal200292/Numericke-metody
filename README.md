@@ -6,4 +6,4 @@ The course included eight laboratory assignments and four bigger projects.
 ## [Applications of Linear Systems](/Linear_Systems)
 ## [Simulated Annealing](/Simulated_Annealing)
 ## [Search Engine](/Search_Engine)
-## [Discrete Fourier Transform](/OCR)
+## [Discrete Fourier Transform](/DFT)

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>results</title>
+    <link rel="stylesheet" href="../static/css/results.css">
+</head>
+<body>
+    <div id="logo">
+        <a href="/" style="text-decoration: none">
+            <span style='color: #1313e4'>G</span>
+            <span style='color: #ea0909'>o</span>
+            <span style='color: #e8dc29'>o</span>
+            <span style='color: #1313e4'>g</span>
+            <span style='color: #018001'>o</span>
+            <span style='color: #ea0909'>l</span>
+        </a>
+    </div>
+    <div id="resultBox">
+        {% for item in results %}
+            <div class="result">
+                Similarity: {{ (100*item.metric)|round(2) }} %
+                <br>
+                <br>
+                <a class="doc" href="{{ item.url }}">Question: {{ item.description }}</a>
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
